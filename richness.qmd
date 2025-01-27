@@ -1,0 +1,44 @@
+---
+title: "GBI richness"
+code-fold: true
+---
+
+Below is a visualization of 'richeness' calculated from the data via sum of the different species.
+
+```{r}
+#| code-summary: load data
+source("R/loadData.R")
+df <- loadData()
+```
+
+```{r}
+#| code-summary: constants
+ES_NUMBER <- 10
+HEX_RES <- 13
+```
+
+```{r}
+#| code-summary: use function to calc & plot indicators
+library(obisindicators)
+library(dplyr)
+source("R/res_changes.R")
+source("R/gmap_indicator.R")
+occ <- df %>%
+  group_by(
+    decimalLongitude, decimalLatitude, species, year) %>%  # remove duplicate rows
+  # In OBIS it's date_year and it's calculated for all records I believe, I'm not
+  # sure if the same is true for year in GBIF- how do we check?
+  filter(!is.na(species))  %>%
+  summarize(
+    records = n(),
+    .groups = "drop") %>%
+  collect()
+grid <- res_changes(occ, resolution=HEX_RES)
+
+
+gmap_indicator(grid, "es", label = "es")
+gmap_indicator(grid, "shannon", label = "shannon")
+gmap_indicator(grid, "simpson", label = "simpson")
+gmap_indicator(grid, "n", label = "n")
+
+```

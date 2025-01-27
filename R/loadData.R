@@ -17,6 +17,7 @@ loadData <- function(){
                     "tampa-observation-11",
                     "tampa-observation-12"),
     species = c("Canada Goose", "White Ibis", "Sandpiper", "Osprey", "American Robin", "Killdeer", "White Pelican", "Northern Cardinal", "Bald Eagle", "Common Grackle", "American Crow", "Blue Jay")
-    )
+    ) |>
+    transform(year = as.numeric(substr(eventDate, 1, 4)))
     return(gbif_example_data)
 }

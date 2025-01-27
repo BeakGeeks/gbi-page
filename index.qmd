@@ -3,26 +3,26 @@ title: "gbi-page"
 code-fold: true
 ---
 
-This is a Quarto website.
+Below is an overview of the points from GBIF.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
 ```{r}
 #| code-summary: load data
 source("R/loadData.R")
+df <- loadData()
 ```
 
 
 ```{R}
 #| code-summary: constants
-mapBoundLat <- c(-83, -82.2)
-mapBoundLon <- c(27.6, 28.5)
+mapBoundLat <- c(-83, -82)
+mapBoundLon <- c(27.5, 28.5)
 ```
 
 ```{R}
 #| code-summary: basic map of points
 library('ggplot2')
 library('maps')
-ggplot(data = gbif_example_data, aes(x = decimalLongitude, y = decimalLatitude)) +
+ggplot(data = df, aes(x = decimalLongitude, y = decimalLatitude)) +
   borders("world", colour = "gray50", fill = "gray90") +
   geom_point(color = "red", size = 3) +
   coord_quickmap(xlim = mapBoundLat, ylim = mapBoundLon) +
@@ -33,9 +33,18 @@ ggplot(data = gbif_example_data, aes(x = decimalLongitude, y = decimalLatitude))
 ```{R}
 #| code-summary: heatmap of points
 # create a plot showing a heatmap from the points
-ggplot(data = gbif_example_data, aes(x = decimalLongitude, y = decimalLatitude)) +
+library('ggplot2')
+library('maps')
+ggplot(data = df, aes(x = decimalLongitude, y = decimalLatitude)) +
   borders("world", colour = "gray50", fill = "gray90") +
-  stat_density_2d(aes(fill = after_stat(level)), geom = "polygon", alpha = 0.2) +
+  stat_density_2d(
+    aes(fill = after_stat(level)), 
+    geom = "polygon", 
+    alpha = 0.2, 
+    # bins=20,
+    n=1000,
+    adjust = 10  # Increase bandwidth for smoother contours
+  ) +
   scale_fill_viridis_c() +
   coord_quickmap(xlim = mapBoundLat, ylim = mapBoundLon) +
   theme_minimal() +
@@ -50,13 +59,13 @@ ggplot(data = gbif_example_data, aes(x = decimalLongitude, y = decimalLatitude))
 library(ggplot2)
 #library(hexbin)
 
-ggplot(data = gbif_example_data, aes(x = decimalLongitude, y = decimalLatitude)) +
+ggplot(data = df, aes(x = decimalLongitude, y = decimalLatitude)) +
   borders("world", colour = "gray50", fill = "gray90") +
   geom_hex(bins = 5000) +  # Adjust 'bins' for resolution
-  scale_fill_viridis_c() +
+  scale_fill_viridis_c(alpha=0.5) +
   coord_quickmap(xlim = mapBoundLat, ylim = mapBoundLon) +
   theme_minimal() +
   labs(x = "Longitude", y = "Latitude", 
-       title = "Hexbin Density Plot of GBIF Observations in Tampa Bay Area",
-       fill = "Count")
+       title = "Hexbin Density Plot of GBIF Bird Observations in Tampa Bay Area",
+       fill = "N Records")
 ```
