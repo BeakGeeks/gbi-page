@@ -33,6 +33,31 @@ SPECIES_LIST <- c("Canada Goose", "Osprey", "Bald Eagle", "Blue Jay")
 filtered_df <- df[df$species %in% SPECIES_LIST, ]
 ```
 
+```{R}
+#| code-summary: heatmap of points
+# create a plot showing a heatmap from the points
+library('ggplot2')
+library('maps')
+mapBoundLat <- c(-83, -82)
+mapBoundLon <- c(27.5, 28.5)
+ggplot(data = filtered_df, aes(x = decimalLongitude, y = decimalLatitude)) +
+  borders("world", colour = "gray50", fill = "gray90") +
+  stat_density_2d(
+    aes(fill = after_stat(level)), 
+    geom = "polygon", 
+    alpha = 0.2, 
+    # bins=20,
+    n=1000,
+    adjust = 10  # Increase bandwidth for smoother contours
+  ) +
+  scale_fill_viridis_c() +
+  coord_quickmap(xlim = mapBoundLat, ylim = mapBoundLon) +
+  theme_minimal() +
+  labs(x = "Longitude", y = "Latitude", 
+       title = "Heat Map of GBIF Observations in Tampa Bay Area",
+       fill = "Density")
+```
+
 ```{r}
 #| code-summary: use function to calc & plot indicators
 source(here("R/gmap_indicator.R"))
