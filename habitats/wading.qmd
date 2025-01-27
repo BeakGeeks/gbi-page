@@ -7,6 +7,9 @@ Focus on wading birds.
 
 
 ```{r setup}
+#| code-summary: setup
+#| message: false
+#| warning: false
 library(here)
 ```
 
