@@ -19,6 +19,9 @@ HEX_RES <- 16
 
 ```{r}
 #| code-summary: use function to calc & plot indicators
+#| message: false
+#| warning: false
+
 source("R/gmap_indicator.R")
 source("R/df2grid.R")
 grid <- df2grid(df, HEX_RES, ES_NUMBER)

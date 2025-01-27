@@ -60,6 +60,9 @@ ggplot(data = filtered_df, aes(x = decimalLongitude, y = decimalLatitude)) +
 
 ```{r}
 #| code-summary: use function to calc & plot indicators
+#| message: false
+#| warning: false
+
 source(here("R/gmap_indicator.R"))
 source(here("R/df2grid.R"))
 grid <- df2grid(filtered_df, HEX_RES, ES_NUMBER)

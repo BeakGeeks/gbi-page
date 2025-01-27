@@ -11,6 +11,8 @@ website:
       - text: Habitat-specific
         menu:
         - habitats/wading.qmd
+      - text: Source Code on GitHub
+        href: https://github.com/BeakGeeks/gbi-page
 format:
   html:
     theme: cosmo
