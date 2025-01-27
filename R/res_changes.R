@@ -10,7 +10,7 @@ library(arrow)
 # library(magick)
 library(ggplot2)
 # function to create hex grid, calculate metrics for different resolution grid sizes
-res_changes <- function(occur, resolution = 13){
+res_changes <- function(occur, resolution = 13, esn = 50){
   dggs <- dgconstruct(projection = "ISEA", topology = "HEXAGON", res = resolution)
   occur$cell <- dgGEO_to_SEQNUM(dggs, occur$decimalLongitude, occur$decimalLatitude)[["seqnum"]]
   idx <- obisindicators::calc_indicators(occur, esn=ES_NUMBER)

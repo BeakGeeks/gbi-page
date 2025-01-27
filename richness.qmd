@@ -19,22 +19,9 @@ HEX_RES <- 13
 
 ```{r}
 #| code-summary: use function to calc & plot indicators
-library(obisindicators)
-library(dplyr)
-source("R/res_changes.R")
 source("R/gmap_indicator.R")
-occ <- df %>%
-  group_by(
-    decimalLongitude, decimalLatitude, species, year) %>%  # remove duplicate rows
-  # In OBIS it's date_year and it's calculated for all records I believe, I'm not
-  # sure if the same is true for year in GBIF- how do we check?
-  filter(!is.na(species))  %>%
-  summarize(
-    records = n(),
-    .groups = "drop") %>%
-  collect()
-grid <- res_changes(occ, resolution=HEX_RES)
-
+source("R/df2grid.R")
+grid <- df2grid(df, HEX_RES, ES_NUMBER)
 
 gmap_indicator(grid, "es", label = "es")
 gmap_indicator(grid, "shannon", label = "shannon")

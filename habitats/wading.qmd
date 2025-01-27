@@ -1,0 +1,47 @@
+---
+title: "GBI richness"
+code-fold: true
+---
+
+Focus on wading birds.
+
+
+```{r setup}
+library(here)
+```
+
+```{r}
+#| code-summary: load data
+source("../R/loadData.R")
+df <- loadData()
+```
+
+```{r}
+#| code-summary: constants
+ES_NUMBER <- 10
+HEX_RES <- 13
+
+# Declare a list of species names to filter
+SPECIES_LIST <- c("Canada Goose", "Osprey", "Bald Eagle", "Blue Jay")
+```
+
+
+```{r}
+#| code-summary: reduce to selected species only
+
+# Subset the dataframe using the species list
+filtered_df <- df[df$species %in% SPECIES_LIST, ]
+```
+
+```{r}
+#| code-summary: use function to calc & plot indicators
+source(here("R/gmap_indicator.R"))
+source(here("R/df2grid.R"))
+grid <- df2grid(filtered_df, HEX_RES, ES_NUMBER)
+
+gmap_indicator(grid, "es", label = "es")
+gmap_indicator(grid, "shannon", label = "shannon")
+gmap_indicator(grid, "simpson", label = "simpson")
+gmap_indicator(grid, "n", label = "n")
+
+```
