@@ -69,8 +69,11 @@ ggplot(data = df, aes(x = decimalLongitude, y = decimalLatitude)) +
        title = "Hexbin Density Plot of GBIF Bird Observations in Tampa Bay Area",
        fill = "N Records")
 ```
+
 ```{r}
 #| code-summary: heatmap with leaflet
+#| message: false
+#| warning: false
 
 library(leaflet)
 library(leaflet.extras)

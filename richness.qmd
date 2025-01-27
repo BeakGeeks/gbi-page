@@ -3,7 +3,7 @@ title: "GBI richness"
 code-fold: true
 ---
 
-Below is a visualization of 'richeness' calculated from the data via sum of the different species.
+Below is a visualization of shannon, simpson, and ES#.
 
 ```{r}
 #| code-summary: load data
@@ -14,7 +14,7 @@ df <- loadData()
 ```{r}
 #| code-summary: constants
 ES_NUMBER <- 2
-HEX_RES <- 13
+HEX_RES <- 16
 ```
 
 ```{r}
