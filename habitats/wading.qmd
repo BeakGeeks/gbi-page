@@ -1,5 +1,5 @@
 ---
-title: "GBI richness"
+title: "Wading Birds"
 code-fold: true
 ---
 
@@ -22,6 +22,7 @@ ES_NUMBER <- 10
 HEX_RES <- 13
 
 # Declare a list of species names to filter
+# TODO: fix this list
 SPECIES_LIST <- c("Canada Goose", "Osprey", "Bald Eagle", "Blue Jay")
 ```
 
@@ -62,7 +63,6 @@ ggplot(data = filtered_df, aes(x = decimalLongitude, y = decimalLatitude)) +
 #| code-summary: use function to calc & plot indicators
 #| message: false
 #| warning: false
-
 source(here("R/gmap_indicator.R"))
 source(here("R/df2grid.R"))
 grid <- df2grid(filtered_df, HEX_RES, ES_NUMBER)
