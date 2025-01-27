@@ -7,9 +7,10 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
       - richness.qmd
-
+      - text: Habitat-specific
+        menu:
+        - habitats/wading.qmd
 format:
   html:
     theme: cosmo
