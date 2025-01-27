@@ -13,7 +13,7 @@ df <- loadData()
 
 ```{r}
 #| code-summary: constants
-ES_NUMBER <- 10
+ES_NUMBER <- 2
 HEX_RES <- 13
 ```
 
