@@ -18,6 +18,14 @@ mapBoundLat <- c(-83, -82)
 mapBoundLon <- c(27.5, 28.5)
 ```
 
+Sample showing *some* of the data:
+
+```{R}
+#| code-summary: create subset of data to avoid overloading the plots
+# subset data to prevent overloading the map
+df_subset <- df[1:1000]  # TODO: check this
+```
+
 ```{R}
 #| code-summary: basic map of points
 library('ggplot2')

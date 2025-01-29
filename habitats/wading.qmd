@@ -15,7 +15,7 @@ library(here)
 
 ```{r}
 #| code-summary: load data
-source("../R/loadData.R")
+source(here("R/loadData.R"))
 df <- loadData()
 ```
 
